@@ -1,0 +1,39 @@
+logging:
+  level:
+    root: INFO
+
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    password: example
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/postgres?useSSL=false
+    username: postgres
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        hbm2ddl:
+          auto: update
+        temp:
+          use_jdbc_metadata_defaults: 'false '
+  kafka:
+    consumer:
+      bootstrap-servers: 127.0.0.1:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: com.example.student.kafka.StudentJsonDeserializer
+    producer:
+      bootstrap-servers: 127.0.0.1:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: com.example.student.kafka.StudentJsonSerializer
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+#    baseline-on-migrate: true
+#    validate-on-migrate: true
+
+
+server:
+  port: 9000

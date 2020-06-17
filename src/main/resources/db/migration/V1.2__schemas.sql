@@ -1,0 +1,1 @@
+insert into student(id, name) VALUES ('1','Alex')
